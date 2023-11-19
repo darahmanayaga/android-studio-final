@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "717162820215",
+    "project_id": "t2023it2-jadebookstore",
+    "storage_bucket": "t2023it2-jadebookstore.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717162820215:android:c20f052c93b5ae1dac4c72",
+        "android_client_info": {
+          "package_name": "com.example.final_exam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9LzYCB5-nYUu3BS29FQWliluemxJg9rg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
