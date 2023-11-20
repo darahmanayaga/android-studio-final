@@ -5,8 +5,8 @@
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
-    <string name="click_to_register">Click to Register</string>
-    <string name="click_to_login">Click to login</string>
+    <string name="click_to_register"><u>Click to Register</u></string>
+    <string name="click_to_login"><u>Click to login</u></string>
     <string name="logout">Logout</string>
     <string name="registerCap">REGISTER</string>
     <string name="loginCap">LOGIN</string>
