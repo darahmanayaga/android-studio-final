@@ -3,12 +3,26 @@ package com.example.final_exam
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
+import java.util.EventListener
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var itemArrayList: ArrayList<Item>
+    private lateinit var myAdapter: MyAdapter
+    private lateinit var db: FirebaseFirestore
 
     private lateinit var auth: FirebaseAuth
     private lateinit var button: Button
@@ -38,5 +52,45 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager (this)
+        recyclerView.setHasFixedSize(true)
+
+        itemArrayList = arrayListOf()
+
+        myAdapter = MyAdapter(itemArrayList)
+
+        recyclerView.adapter = myAdapter
+
+        EventChangeListener()
+
+    }
+    private fun EventChangeListener(){
+        db = FirebaseFirestore.getInstance()
+        db.collection("items").
+            addSnapshotListener(object : com.google.firebase.firestore.EventListener<QuerySnapshot>{
+                override fun onEvent(
+                    value: QuerySnapshot?,
+                    error: FirebaseFirestoreException?
+                ){
+
+                    if (error != null){
+                        Log.e("Firestore Error", error.message.toString())
+                        return
+                    }
+
+                    for(dc: DocumentChange in value?.documentChanges!!){
+                        if (dc.type == DocumentChange.Type.ADDED){
+                            itemArrayList.add(dc.document.toObject(Item::class.java))
+                        }
+                    }
+
+                    myAdapter.notifyDataSetChanged()
+
+                }
+            })
+
+
     }
 }
