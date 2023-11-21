@@ -66,31 +66,37 @@ class MainActivity : AppCompatActivity() {
         EventChangeListener()
 
     }
-    private fun EventChangeListener(){
+    private fun EventChangeListener() {
         db = FirebaseFirestore.getInstance()
-        db.collection("items").
-            addSnapshotListener(object : com.google.firebase.firestore.EventListener<QuerySnapshot>{
+        db.collection("items")
+            .addSnapshotListener(object : com.google.firebase.firestore.EventListener<QuerySnapshot> {
                 override fun onEvent(
                     value: QuerySnapshot?,
                     error: FirebaseFirestoreException?
-                ){
+                ) {
 
-                    if (error != null){
+                    if (error != null) {
                         Log.e("Firestore Error", error.message.toString())
                         return
                     }
 
-                    for(dc: DocumentChange in value?.documentChanges!!){
-                        if (dc.type == DocumentChange.Type.ADDED){
-                            itemArrayList.add(dc.document.toObject(Item::class.java))
+                    for (dc: DocumentChange in value?.documentChanges!!) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
+                            val item = dc.document.toObject(Item::class.java)
+
+                            // Get the first photo URL if the 'photoUrls' field is an array or nested collection
+                            val photoUrls = dc.document.get("photoUrl") as? List<*>
+                            if (!photoUrls.isNullOrEmpty() && photoUrls[0] is String) {
+                                item.imageUrl = photoUrls[0] as String
+                            }
+
+                            itemArrayList.add(item)
                         }
                     }
 
                     myAdapter.notifyDataSetChanged()
-
                 }
             })
-
-
     }
+
 }
