@@ -1,10 +1,12 @@
 package com.example.final_exam
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -27,6 +29,15 @@ class MyAdapter(private val itemList: ArrayList<Item> ) : RecyclerView.Adapter<M
             .load(item.imageUrl)
             .placeholder(R.drawable.ic_launcher_background) // Placeholder image while loading
             .into(holder.imageView)
+
+        // Set a click listener for the card
+        holder.itemView.setOnClickListener {
+            // Start a new activity with the details of the clicked item
+            val intent = Intent(holder.itemView.context, ItemDetailsActivity::class.java)
+            intent.putExtra("item", item)
+            // Pass the entire Item object to the next activity
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
