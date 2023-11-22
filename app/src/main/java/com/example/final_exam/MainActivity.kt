@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
     private lateinit var user: FirebaseUser
 
+    private lateinit var addButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -64,6 +66,13 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = myAdapter
 
         EventChangeListener()
+
+        addButton = findViewById(R.id.addNewItem)
+
+        addButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, AddItem::class.java)
+            startActivity(intent)
+        }
 
     }
     private fun EventChangeListener() {
