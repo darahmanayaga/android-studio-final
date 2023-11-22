@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="50sp"
+    tools:context=".AddItem">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Name" />
+
+        <EditText
+            android:id="@+id/editDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Description"
+            android:layout_marginTop="15sp"/>
+
+        <EditText
+            android:id="@+id/editPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Price"
+            android:layout_marginTop="15sp"/>
+
+        <ImageButton
+            android:id="@+id/imageUpload"
+            android:layout_width="117dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="50sp"
+            android:layout_weight="0"
+            android:src="@drawable/baseline_add_a_photo_24"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/detailsUpload"
+            android:layout_width="157dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:backgroundTint="#0a4e17"
+            android:text="UPLOAD"
+            android:layout_marginTop="50sp
+"
+            app:cornerRadius="5sp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
